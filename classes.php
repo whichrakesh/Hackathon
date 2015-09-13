@@ -94,7 +94,7 @@
       var $sender_id;
       var $timestamp;
 
-      function Message($id, $content, $sender_id, $timestamp){
+      function Message($id, $case_id, $sender_id,$content,  $timestamp){
          $this->id = $id;
          $this->case_id = $case_id;
          $this->content = $content;

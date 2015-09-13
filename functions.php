@@ -88,7 +88,7 @@ function getLawyers($subcategory_id, $city, $locality, $price_range){
 
 function getCasesOfCustomer($customer_id){
 	$sql = "select * from cases where customer_id=" . $customer_id;
-	echo $sql;
+	//echo $sql;
 	global $conn;
 	$result = $conn->query($sql);	
 	$case_list = array();
@@ -105,12 +105,13 @@ function getCasesOfCustomer($customer_id){
 			array_push($case_list,$case);
 		}
 	}
-	print_r($case_list);
+	//print_r($case_list);
 	return $case_list;
 }
 
 function getMessagesForCase($case_id){
 	$sql = "select * from messages where case_id=" . $case_id;
+	//echo $sql;
 	global $conn;
 	$result = $conn->query($sql);	
 	$messages_list = array();
@@ -125,6 +126,20 @@ function getMessagesForCase($case_id){
 			array_push($messages_list,$message);
 		}
 	}
+	//print_r($messages_list);
 	return $messages_list;
+}
+
+function getLawyerNameFromId($user_id){
+	$sql = "select * from lawyers where id=" . $user_id;
+	//echo $sql;
+	global $conn;
+	$result = $conn->query($sql);	
+	if ($result->num_rows > 0) {		
+		if($row = $result->fetch_assoc()) {
+			return $row['name'];
+		}
+	}
+	return NULL;
 }
 ?>

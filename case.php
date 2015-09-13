@@ -136,15 +136,17 @@
         		<!-- Categories -->
         		<div class="col-lg-12 col-md-12 col-sm-6">
 	        		<div class="no-padding">
-	            		<span class="title">CATEGORIES</span>
+	            		<span class="title">My Cases</span>
 	            	</div>
 					<div id="main_menu">
                         <div class="list-group panel panel-cat">
-                            <?php foreach(getCasesOfCustomer($customer_id) as $case) {
+                            <?php foreach(getCasesOfCustomer($customer_id) as $case) {                                
+                                if($case->id == $case_id){
+                                    echo '<a href="?case_id=' . $case->id . '" class="list-group-item active"> ' . $case->title . '</a>';
+                                } else { 
+                                    echo '<a href="?case_id=' . $case->id . '" class="list-group-item"> ' . $case->title . '</a>';
+                                    }}
                                 ?>
-                                <a href="?case_id=" +  <?php echo $case->id?>  class="list-group-item"> description</a>
-                            <?php }
-                            ?>
                         </div>
                     </div>
 				</div>
@@ -153,38 +155,40 @@
 
         	</div>
 
-        	<div class="clearfix visible-sm"></div>
+        	<div class="clearfix visible-sm" ></div>
 
 			<!-- Catalogue -->
-        	<div class="col-lg-9 col-md-9 col-sm-12">
+        	<div class="col-lg-9 col-md-9 col-sm-12 " style="min-height:300px">
         		<div class="col-lg-12 col-sm-12">
-            		<span class="title">CHATS</span>
+            		<span class="title">Messages for the case</span>
             	</div>
                 <?php 
-                    $messages = getMessagesForCase($case_id);
-                    foreach($messages as $message){
-                        $specializationsId = explode(",", $lawyer->specialization);   
+                    if($case_id != -1){
+                        $messages = getMessagesForCase($case_id);
+                    }                    
+                    foreach($messages as $message){                          
                     ?>
-                    <div class="col-lg-4 col-sm-4 hero-feature text-center">
-                        
+                    <div class="col-md-12 bg-success" style="margin:4px">
+                        <div class = "col-md-4">
+                            <?php if($message->sender_id == $customer_id) {
+                                    echo "Me:";
+                                } else {
+                                    echo getLawyerNameFromId($message->sender_id);
+                                }
+                                    ;?>
+                        </div>
+
+                        <div class = "col-md-8">
+                            <?php echo $message->content; ?>
+                        </div>
                     </div>
+                    <br>
                     <?php
                     }
-                ?>
-	            
-	              
-				<div class="text-center">
-		        	<ul class="pagination catalogue-pagination">
-						<li class="disabled"><a>First</a></li>
-						<li class="disabled"><a>Prev</a></li>
-						<li class="active"><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">1</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">2</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">3</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">4</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">Next</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">Last</a></li>
-					</ul>
-				</div>
+                ?>	        
+                <div>
+                    <input type="text" name="reply" class="form-control" placeholder="Enter Reply Here" autofocus>                    
+                </div>    
         	</div>
         	<!-- End Catalogue -->
 
