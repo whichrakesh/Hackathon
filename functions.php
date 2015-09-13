@@ -3,21 +3,64 @@ include 'dbconnect.php';
 include 'classes.php';
 
 function getLawyers($subcategory_id, $city, $locality, $price_range){
-	if($subcategory_id == -1){
-		if($city = ""){
-			$sql = "SELECT * from lawyers INNER JOIN users on lawyers.id = users.id  
-				where price_range = $price_range				
-				order by ratings desc";
+	$sql = "SELECT * from lawyers INNER JOIN users on lawyers.id = users.id ";
+	if(is_null($price_range)){
+		if(is_null($subcategory_id)){
+			if (is_null($city) or $city == "" ){
+				$sql = $sql. "order by ratings desc";
+			} else {
+				if (is_null($locality) or $locality == "" ){
+					$sql = $sql. "  where city = '$city'			
+					order by ratings desc";
+				} else {
+					$sql = $sql. "  where city = '$city' and locality = '$locality'				
+					order by ratings desc";
+				}
+			}		
 		} else {
-			$sql = "SELECT * from lawyers INNER JOIN users on lawyers.id = users.id  
-			where city = '$city' and locality = '$locality' and  price_range = $price_range				
-			order by ratings desc";
-		}		
+			if (is_null($city) or $city == "" ){
+				$sql = $sql. " where locate($subcategory_id, lawyers.specialization ) > 0				
+					order by ratings desc";
+			} else {
+				if (is_null($locality) or $locality == "" ){
+					$sql = $sql. "  where locate($subcategory_id, lawyers.specialization ) > 0 and city = '$city'				
+					order by ratings desc";
+				} else {
+					$sql = $sql. "  where locate($subcategory_id, lawyers.specialization ) > 0 and city = '$city' and locality = '$locality'			
+					order by ratings desc";
+				}
+			}
+		}	
 	} else {
-		$sql = "SELECT * from lawyers INNER JOIN users on lawyers.id = users.id  
-				where locate($subcategory_id, lawyers.specialization ) > 0 and price_range = $price_range	
-				order by ratings desc";
+		if(is_null($subcategory_id)){
+			if (is_null($city) or $city == "" ){
+				$sql = $sql. " where price_range = $price_range				
+					order by ratings desc";
+			} else {
+				if (is_null($locality) or $locality == "" ){
+					$sql = $sql. "  where city = '$city' and price_range = $price_range				
+					order by ratings desc";
+				} else {
+					$sql = $sql. "  where city = '$city' and locality = '$locality' and price_range = $price_range				
+					order by ratings desc";
+				}
+			}		
+		} else {
+			if (is_null($city) or $city == "" ){
+				$sql = $sql. " where locate($subcategory_id, lawyers.specialization ) > 0 and price_range = $price_range				
+					order by ratings desc";
+			} else {
+				if (is_null($locality) or $locality == "" ){
+					$sql = $sql. "  where locate($subcategory_id, lawyers.specialization ) > 0 and city = '$city' and price_range = $price_range				
+					order by ratings desc";
+				} else {
+					$sql = $sql. "  where locate($subcategory_id, lawyers.specialization ) > 0 and city = '$city' and locality = '$locality' and price_range = $price_range				
+					order by ratings desc";
+				}
+			}
 	}	
+	}	
+	echo $sql;
 	global $conn;
 	$result = $conn->query($sql);	
 	if ($result->num_rows > 0) {
@@ -41,8 +84,8 @@ function getLawyers($subcategory_id, $city, $locality, $price_range){
 	}	
 }
 
+//print_r(getLawyers(1,"Mumbai","Powai",1));
 
-// print_r(getLawyers(1,"Mumbai","Powai",1));
 
 function postCase($case){
 
