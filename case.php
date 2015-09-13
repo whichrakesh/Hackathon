@@ -2,6 +2,7 @@
     include 'functions.php';
     include 'quikr.php';    
     session_start();
+    $_SESSION['id'] = 12;
     if(!(isset($_SESSION['id']))){
         header('Location:  login.php');
     }
@@ -27,70 +28,43 @@
 
 </head>
 <body>
-	<header>
-	    <div class="container">
-	        <div class="row">
 
-	        	<!-- Logo -->
-	            <div class="col-lg-4 col-md-3 hidden-sm hidden-xs">
-	            	<div class="well logo">
-	            		<a href="http://demo.18maret.com/demo/mimity/v1.2/index.html">
-	            			Mimity <span>Online Shop</span>
-	            		</a>
-	            		<div>Lorem ipsum dolor sit amet.</div>
-	            	</div>
-	            </div>
-	            <!-- End Logo -->
 
-				<!-- Search Form -->
-	            <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
-	            	<div class="well">
-	                    <form action="">
-	                        <div class="input-group">
-	                            <input type="text" class="form-control input-search" placeholder="Enter something to search">
-	                            <span class="input-group-btn">
-	                                <button class="btn btn-default no-border-left" type="submit"><i class="fa fa-search"></i></button>
-	                            </span>
-	                        </div>
-	                    </form>
-	                </div>
-	            </div>
-	            <!-- End Search Form -->
+    <header>
+        <div class="container">
+            <div class="row">
 
-	            <!-- Shopping Cart List -->
-	            <div class="col-lg-3 col-md-4 col-sm-5">
-	                <div class="well">
-	                    <div class="btn-group btn-group-cart">
-	                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="pull-left"><i class="fa fa-shopping-cart icon-cart"></i></span>
-                                <span class="pull-left">Shopping Cart: 2 item(s)</span>
-                                <span class="pull-right"><i class="fa fa-caret-down"></i></span>
-                            </button>
-                            <ul class="dropdown-menu cart-content" role="menu">
-                                <li>
-                                    <a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">
-                                        <b>Penn State College T-Shirt</b>
-                                        <span>x1 $528.96</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">
-                                        <b>Live Nation ACDC Gray T-Shirt</b>
-                                        <span>x1 $428.96</span>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="http://demo.18maret.com/demo/mimity/v1.2/cart.html">Total: $957.92</a></li>
-                            </ul>
-	                    </div>
-	                </div>
-	            </div>
-	            <!-- End Shopping Cart List -->
-	        </div>
-	    </div>
-    </header>
+                <!-- Logo -->
+                <div class="col-lg-4 col-md-3 hidden-sm hidden-xs">
+                    <div class="well logo">
+                        <a href="http://demo.18maret.com/demo/mimity/v1.2/index.html">
+                            Law <span>Portal</span>
+                        </a>
+                        <div>Find lawyer here</div>
+                    </div>
+                </div>
+                <!-- End Logo -->
 
-	<!-- Navigation -->
+                <!-- Search Form -->
+                <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
+                    <div class="well">
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-search" placeholder="Enter something to search">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default no-border-left" type="submit"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End Search Form -->
+
+            </div>
+        </div>
+    </header> 
+
+<!-- Navigation -->
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -105,29 +79,28 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="http://demo.18maret.com/demo/mimity/v1.2/index.html">Home</a></li>
-                    <li><a href="./files/search.php" class="active">Catalogue</a></li>
-                    <li><a href="http://demo.18maret.com/demo/mimity/v1.2/cart.html">Shopping Cart</a></li>
-                    <li><a href="http://demo.18maret.com/demo/mimity/v1.2/checkout.html">Checkout</a></li>
-                    <li class="nav-dropdown">
-                    	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="dropdown-toggle" data-toggle="dropdown">
-							Pages <span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="http://demo.18maret.com/demo/mimity/v1.2/about.html">About Us</a></li>
-							<li><a href="http://demo.18maret.com/demo/mimity/v1.2/contact.html">Contact Us</a></li>
-							<li><a href="http://demo.18maret.com/demo/mimity/v1.2/typography.html">Typography</a></li>
-							<li><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Product Detail</a></li>
+                    <li><a href="./case.php" class="active">Home</a></li>
+                    <li><a href="./search.php" >Search Lawyers</a></li>
+                    <li><a href="./wordpress">Law Blog</a></li>
+<!--                     <li class="nav-dropdown">
+                        <a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="dropdown-toggle" data-toggle="dropdown">
+                            Pages <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://demo.18maret.com/demo/mimity/v1.2/about.html">About Us</a></li>
+                            <li><a href="http://demo.18maret.com/demo/mimity/v1.2/contact.html">Contact Us</a></li>
+                            <li><a href="http://demo.18maret.com/demo/mimity/v1.2/typography.html">Typography</a></li>
+                            <li><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Product Detail</a></li>
                             <li><a href="http://demo.18maret.com/demo/mimity/v1.2/compare.html">Compare</a></li>
                             <li><a href="http://demo.18maret.com/demo/mimity/v1.2/login.html">Login</a></li>
                             <li><a href="http://demo.18maret.com/demo/mimity/v1.2/register.html">Register</a></li>
-						</ul>
-                    </li>
+                        </ul>
+                    </li> -->
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- End Navigation -->
+
 
     <div class="container main-container">
         <div class="row">

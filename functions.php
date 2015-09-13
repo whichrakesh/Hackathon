@@ -60,7 +60,7 @@ function getLawyers($subcategory_id, $city, $locality, $price_range){
 			}
 	}	
 	}	
-	echo $sql;
+	// echo $sql;
 	global $conn;
 	$result = $conn->query($sql);	
 	if ($result->num_rows > 0) {

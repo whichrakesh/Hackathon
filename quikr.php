@@ -72,11 +72,70 @@
         for($i = 0; $i < sizeof($list); $i ++){
             $ad = $list[$i];
            if($ad->attribute_Ad_Type == "offer" and $ad->ad_quality_score > 8){
-                array_push($validArr, $ad);
+                if(!is_null($city)){
+                    if($ad->cityName == $city){
+                        if(!is_null($locality)){
+                            if($ad->ad_locality == $locality and $ad->cityName == $city)
+                            filterCategory($category, $ad, $validArr);
+                        }
+                        else filterCategory($category, $ad, $validArr);
+                    }
+                }
+                else filterCategory($category, $ad, $validArr);
            }
 
         }
-        print_r($validArr);
+        $lawyer_list = array();
+        // print_r($validArr);
+        foreach($validArr as $row){
+            $imgU = null;
+            if(is_array($row->images) and sizeof($row->images) >= 1)
+                $imgU = $row->images[0];
+            else if(!is_array($row->images) and $row->images != "" and $row->images != null)
+                $imgU = $row->images;
+            $lawyer = new Lawyer(-1,$row->title,"-1", "-1",
+                       $row->id,"-1",          
+                       $row->specialization,
+                       "-1",
+                       $row->detail,                           
+                       $row->verified_mobile,
+                       -1,
+                       $imgU,
+                       $row->cityName,
+                       $row->ad_locality
+                        );
+            array_push($lawyer_list, $lawyer);
+        }
+        return $lawyer_list;
+    }
+
+    function getSpecialization($data){
+        $categories = array("Divorce","Property","Family","Criminal",
+        "Matrimonial","HighCourt","Civil","Consumer","Labour", 
+        "Cooperative","Leave","Notary","Corporate","Will","Trademark","Rent");
+        $str = "";
+        foreach($categories as $key=>$category){
+            if(strpos(strtolower($data), strtolower($category)) !== false){
+                $str .= $key.",";
+            }
+        }
+        // echo "Dd";
+        if(substr($str, -1) == ",")
+            $str = substr($str, 0, -1);
+        return $str;
+    }
+
+    function filterCategory($category, $ad, &$array){
+        $ad->specialization = getSpecialization($ad->content);
+        if(is_null($category)){
+            array_push($array, $ad);
+        }
+        else {
+            $total = strtolower($ad->title.$ad->content);
+            if(strpos($total, strtolower($category)) !== false){
+                array_push($array, $ad);
+            }
+        }
     }
 
     function getQuikrCustomers($city){
@@ -88,16 +147,8 @@
 
     }
     // $json = createAdRequestJson("Mumbai", "IIT Powai", "9345545434", "somethineflakdakgfsd galdkgjdfgldkga g", "des dafjdsjkfjkasfhkdfjkadkfjkajdsfsa co", "imagessss");
-    // echo json_encode($json);
-    // sendPostAdRequest($json);
-    //$json = getLawyersQ("Divorce", "Mumbai", "Bandra West");
-
-
-    // foreach ($jsonIterator as $key => $val) {
-    //     if(is_array($val)) {
-    //         echo "$key:\n";
-    //     } else {
-    //         echo "$key => $val\n";
-    //     }
-    // }
+    // $json = getLawyersQ("Divorce", null, null);//"Bandra West");
+    // print_r($json);
+    //getSpecialization("divorce damp hello Corporate");
+    // getLawyersQ("Mumbai",)
 ?>

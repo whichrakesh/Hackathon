@@ -12,7 +12,7 @@
     $subcategory_id = array_search($_GET['category'], $categories);
     $lawyers_list = getLawyers($subcategory_id, $city, $locality, $price_range);
     $lawyers_listQ = getLawyersQ($_GET['category'], $city, $locality);
-    print_r($lawyers_list);
+    // print_r($lawyers_list);
 ?>
 
 <!DOCTYPE html>
@@ -25,14 +25,32 @@
     <link href="./files/bootstrap.css" rel="stylesheet">
     <link href="./files/font-awesome.min.css" rel="stylesheet">
     <link href="./files/style.css" rel="stylesheet">
+     <link href="./files/style.css" rel="stylesheet">
+    <script type="text/javascript" src="./js/jquery-latest.min.js"></script>
 <style type="text/css"></style>
 <!--Start of Zopim Live Chat Script-->
 // <script type="text/javascript">
-// window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-// d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-// _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-// $.src="//v2.zopim.com/?3JZTQhap0NApOOlmRqR4MrdYdIjwTfwu";z.t=+new Date;$.
-// type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="//v2.zopim.com/?3JZTQhap0NApOOlmRqR4MrdYdIjwTfwu";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
 // </script>
 <!--End of Zopim Live Chat Script-->
 
@@ -46,9 +64,9 @@
 	            <div class="col-lg-4 col-md-3 hidden-sm hidden-xs">
 	            	<div class="well logo">
 	            		<a href="http://demo.18maret.com/demo/mimity/v1.2/index.html">
-	            			Mimity <span>Online Shop</span>
+	            			Law <span>Portal</span>
 	            		</a>
-	            		<div>Lorem ipsum dolor sit amet.</div>
+	            		<div>Find lawyer here</div>
 	            	</div>
 	            </div>
 	            <!-- End Logo -->
@@ -68,35 +86,6 @@
 	            </div>
 	            <!-- End Search Form -->
 
-	            <!-- Shopping Cart List -->
-	            <div class="col-lg-3 col-md-4 col-sm-5">
-	                <div class="well">
-	                    <div class="btn-group btn-group-cart">
-	                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="pull-left"><i class="fa fa-shopping-cart icon-cart"></i></span>
-                                <span class="pull-left">Shopping Cart: 2 item(s)</span>
-                                <span class="pull-right"><i class="fa fa-caret-down"></i></span>
-                            </button>
-                            <ul class="dropdown-menu cart-content" role="menu">
-                                <li>
-                                    <a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">
-                                        <b>Penn State College T-Shirt</b>
-                                        <span>x1 $528.96</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">
-                                        <b>Live Nation ACDC Gray T-Shirt</b>
-                                        <span>x1 $428.96</span>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="http://demo.18maret.com/demo/mimity/v1.2/cart.html">Total: $957.92</a></li>
-                            </ul>
-	                    </div>
-	                </div>
-	            </div>
-	            <!-- End Shopping Cart List -->
 	        </div>
 	    </div>
     </header>
@@ -116,11 +105,10 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="http://demo.18maret.com/demo/mimity/v1.2/index.html">Home</a></li>
-                    <li><a href="./files/search.php" class="active">Catalogue</a></li>
-                    <li><a href="http://demo.18maret.com/demo/mimity/v1.2/cart.html">Shopping Cart</a></li>
-                    <li><a href="http://demo.18maret.com/demo/mimity/v1.2/checkout.html">Checkout</a></li>
-                    <li class="nav-dropdown">
+                    <li><a href="./case.php">Home</a></li>
+                    <li><a href="./search.php" class="active">Search Lawyers</a></li>
+                    <li><a href="./wordpress">Law Blog</a></li>
+<!--                     <li class="nav-dropdown">
                     	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="dropdown-toggle" data-toggle="dropdown">
 							Pages <span class="caret"></span>
 						</a>
@@ -133,7 +121,7 @@
                             <li><a href="http://demo.18maret.com/demo/mimity/v1.2/login.html">Login</a></li>
                             <li><a href="http://demo.18maret.com/demo/mimity/v1.2/register.html">Register</a></li>
 						</ul>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -172,56 +160,41 @@
 				</div>
 				<!-- End Categories -->
 
-				<!-- Best Seller -->
-				<div class="col-lg-12 col-md-12 col-sm-6">
-					<div class="no-padding">
-	            		<span class="title">BEST SELLER</span>
-	            	</div>
-		            <div class="hero-feature">
-		                <div class="thumbnail text-center">
-		                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-		                    	<img src="./files/product-9.jpg" alt="" style="position: absolute; width: 280px; height: auto; max-width: none; max-height: none; left: -28px; top: 0px;">
-		                	</a>
-		                    <div class="caption prod-caption">
-		                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Ohio State College T-Shirt</a></h4>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-		                        <p>
-		                        	</p><div class="btn-group">
-			                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 924.25</a>
-			                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-		                        	</div>
-		                        <p></p>
-		                    </div>
-		                </div>
-		            </div>
-					<div class="hero-feature hidden-sm">
-		                <div class="thumbnail text-center">
-		                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-		                    	<img src="./files/product-8.jpg" alt="" style="position: absolute; width: 250px; height: auto; max-width: none; max-height: none; left: -13px; top: 0px;">
-		                	</a>
-		                    <div class="caption prod-caption">
-		                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Penn State College T-Shirt</a></h4>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-		                        <p>
-		                        	</p><div class="btn-group">
-			                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 528.96</a>
-			                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-		                        	</div>
-		                        <p></p>
-		                    </div>
-		                </div>
-		            </div>
-				</div>
-				<!-- End Best Seller -->
-
+				
         	</div>
 
         	<div class="clearfix visible-sm"></div>
 
 			<!-- Catalogue -->
         	<div class="col-lg-9 col-md-9 col-sm-12">
+                <form class="col-lg-12 col-sm-12">
+                    <span class="title">Filters</span>
+                        <label for="locality" class="sr-only">City :</label> 
+                        <select class="form-control" name="city" id="city">
+                            <option <?php if($_GET["city"] == "Mumbai") echo "selected=\"selected\""; ?>>Mumbai</option>
+                            <option <?php if($_GET["city"] == "Delhi") echo "selected=\"selected\""; ?>>Delhi</option>
+                            <option <?php if($_GET["city"] == "Bangalore") echo "selected=\"selected\""; ?>>Bangalore</option>
+                            <option <?php if($_GET["city"] == "Kolkata") echo "selected=\"selected\""; ?>>Kolkata</option>
+                          </select>                         
+                        <label for="locality" class="sr-only">Locality :</label> 
+                        <select class="form-control" name="locality" id="locality">
+                            <option <?php if($_GET["locality"] == "Powai") echo "selected=\"selected\""; ?>>Powai</option>
+                            <option <?php if($_GET["locality"] == "Bandra East") echo "selected=\"selected\""; ?>>Bandra East</option>
+                            <option <?php if($_GET["locality"] == "Bandra West") echo "selected=\"selected\""; ?>>Bandra West</option>
+                            <option <?php if($_GET["locality"] == "Andheri West") echo "selected=\"selected\""; ?>>Andheri West</option>
+                        </select> 
+                        <label for="locality" class="sr-only">Price Range :</label> 
+                        <select class="form-control" name="price_range" id="price_range">
+                            <option <?php if($_GET["price_range"] == 1) echo "selected=\"selected\""; ?>value="1">Very Cheap</option>
+                            <option <?php if($_GET["price_range"] == 2) echo "selected=\"selected\""; ?>value="2">Cheap</option>
+                            <option <?php if($_GET["price_range"] == 3) echo "selected=\"selected\""; ?>value="3">Medium</option>
+                            <option <?php if($_GET["price_range"] == 4) echo "selected=\"selected\""; ?>value="4">Costly</option>
+                            <option <?php if($_GET["price_range"] == 5) echo "selected=\"selected\""; ?>value="5">Very Costly</option>
+                        </select>
+                        <input class="btn btn-info" type="submit"></input>                         
+                </form>
         		<div class="col-lg-12 col-sm-12">
-            		<span class="title">PRODUCTS CATALOGUE</span>
+            		<span class="title">Lawyers</span>
             	</div>
                 <?php 
                     foreach($lawyers_list as $lawyer){
@@ -230,7 +203,7 @@
                     <div class="col-lg-4 col-sm-4 hero-feature text-center">
                         <div class="thumbnail">
                             <center>
-                            <img src="" name="aboutme" width="140" height="140" border="0" class="img-circle">
+                            <img src="<?php if($lawyer->photo_url != null) echo $lawyer->photo_url;?>" name="aboutme" width="140" height="140" border="0" class="img-circle">
                             <h3 class="media-heading"><?=$lawyer->name?>
                                 <?php if($lawyer->verified == 1){
                                         echo "<span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\" style=\"color: green;\"></span>";
@@ -269,167 +242,37 @@
                     <?php
                     }
                 ?>
-	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
-                    <div class="thumbnail">
-                        <center>
-                        <img src="" name="aboutme" width="140" height="140" border="0" class="img-circle">
-                        <h3 class="media-heading"><small>USA</small></h3>
-                        <span><strong>Specialization: </strong></span>
-                            <span class="label label-warning"></span>
-                            <span class="label label-info"></span>
-                            <span class="label label-info"></span>
-                            <span class="label label-success"></span>
-                        </center>
+	            
+
+                <div class="col-lg-12 col-sm-12">
+                    <span class="title">Quikr Lawyers</span>
+                </div>
+                <?php 
+                    foreach($lawyers_listQ as $lawyer){
+                        $specializationsId = explode(",", $lawyer->specialization);   
+                    ?>
+                    <div class="col-lg-4 col-sm-4 hero-feature text-center">
+                        <div class="thumbnail">
+                            <center>
+                            <img src="<?php if($lawyer->photo_url != null) echo $lawyer->photo_url;?>" name="aboutme" width="140" height="140" border="0" class="img-circle">
+                            <h3 class="media-heading"><?=$lawyer->name?>
+                                <?php if($lawyer->verified == 1){
+                                        echo "<span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\" style=\"color: green;\"></span>";
+                                    }
+                                ?>
+                            </h3>
+                            <span><strong>Specialization: </strong></span>
+                                <?php foreach($specializationsId as $id){
+                                    echo "<span class=\"label label-success\">".$categories[$id]."</span>\n";
+                                    }
+                                ?>
+                                <br> 
+                            </center>
+                        </div>
                     </div>
-	            </div>
-	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
-	                <div class="thumbnail">
-	                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-	                    	<img src="./files/product-3.jpg" alt="" style="position: absolute; width: 250px; height: auto; max-width: none; max-height: none; left: -4px; top: 0px;">
-	                	</a>
-	                    <div class="caption prod-caption">
-	                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Classic Laundry Green Graphic T-Shirt</a></h4>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-	                        <p>
-	                        	</p><div class="btn-group">
-		                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 628.96</a>
-		                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-	                        	</div>
-	                        <p></p>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
-	                <div class="thumbnail">
-	                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-	                    	<img src="./files/product-4.jpg" alt="" style="position: absolute; width: 250px; height: auto; max-width: none; max-height: none; left: -4px; top: 0px;">
-	                	</a>
-	                    <div class="caption prod-caption">
-	                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Disc Jockey Print T-Shirt</a></h4>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-	                        <p>
-	                        	</p><div class="btn-group">
-		                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 394.64</a>
-		                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-	                        	</div>
-	                        <p></p>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
-	                <div class="thumbnail">
-	                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-	                    	<img src="./files/product-5.jpg" alt="" style="position: absolute; width: 250px; height: auto; max-width: none; max-height: none; left: -4px; top: 0px;">
-	                	</a>
-	                    <div class="caption prod-caption">
-	                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Live Nation 3 Days of Peace and Music Carbon</a></h4>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-	                        <p>
-	                        	</p><div class="btn-group">
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 428.96</a>
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-	                        	</div>
-	                        <p></p>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
-	                <div class="thumbnail">
-	                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-	                    	<img src="./files/product-6.jpg" alt="" style="position: absolute; width: 250px; height: auto; max-width: none; max-height: none; left: -4px; top: 0px;">
-	                	</a>
-	                    <div class="caption prod-caption">
-	                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Live Nation ACDC Gray T-Shirt</a></h4>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-	                        <p>
-	                        	</p><div class="btn-group">
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 428.96</a>
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-	                        	</div>
-	                        <p></p>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
-	                <div class="thumbnail">
-	                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-	                    	<img src="./files/product-7.jpg" alt="" style="position: absolute; width: 250px; height: auto; max-width: none; max-height: none; left: -4px; top: 0px;">
-	                	</a>
-	                    <div class="caption prod-caption">
-	                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Live Nation Aerosmith Ivory T-Shirt</a></h4>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-	                        <p>
-	                        	</p><div class="btn-group">
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 632.15</a>
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-	                        	</div>
-	                        <p></p>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
-	                <div class="thumbnail">
-	                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-	                    	<img src="./files/product-10.jpg" alt="" style="position: absolute; width: 242px; height: 258px; max-width: none; max-height: none; left: 0px; top: 0px;">
-	                	</a>
-	                    <div class="caption prod-caption">
-	                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Adidas Men Blue &amp; Red Striped Polo T-shirt </a></h4>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-	                        <p>
-	                        	</p><div class="btn-group">
-		                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 22.22</a>
-		                        	<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-	                        	</div>
-	                        <p></p>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
-	                <div class="thumbnail">
-	                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-	                    	<img src="./files/product-11.jpg" alt="" style="position: absolute; width: 248px; height: auto; max-width: none; max-height: none; left: -3px; top: 0px;">
-	                	</a>
-	                    <div class="caption prod-caption">
-	                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Adidas Men Flame Black T-shirt</a></h4>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-	                        <p>
-	                        	</p><div class="btn-group">
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 15.47</a>
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-	                        	</div>
-	                        <p></p>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-lg-4 col-sm-4 hero-feature text-center">
-	                <div class="thumbnail">
-	                	<a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html" class="link-p" style="overflow: hidden; position: relative;">
-	                    	<img src="./files/product-12.jpg" alt="" style="position: absolute; width: 251px; height: auto; max-width: none; max-height: none; left: -4px; top: 0px;">
-	                	</a>
-	                    <div class="caption prod-caption">
-	                        <h4><a href="http://demo.18maret.com/demo/mimity/v1.2/detail.html">Adidas Men Red Printed T-shirt</a></h4>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-	                        <p>
-	                        	</p><div class="btn-group">
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-default">$ 20.63</a>
-	                        		<a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-	                        	</div>
-	                        <p></p>
-	                    </div>
-	                </div>
-	            </div>
-				<div class="text-center">
-		        	<ul class="pagination catalogue-pagination">
-						<li class="disabled"><a>First</a></li>
-						<li class="disabled"><a>Prev</a></li>
-						<li class="active"><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">1</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">2</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">3</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">4</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">Next</a></li>
-						<li><a href="http://demo.18maret.com/demo/mimity/v1.2/catalogue.html#">Last</a></li>
-					</ul>
-				</div>
+                    <?php
+                    }
+                ?>
         	</div>
         	<!-- End Catalogue -->
 
