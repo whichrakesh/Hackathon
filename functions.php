@@ -42,7 +42,7 @@ function getLawyers($subcategory_id, $city, $locality, $price_range){
 }
 
 
-print_r(getLawyers(1,"Mumbai","Powai",1));
+// print_r(getLawyers(1,"Mumbai","Powai",1));
 
 function postCase($case){
 
