@@ -1,42 +1,49 @@
 <?php
    class User {
       var $id;
+      var $name;
       var $email;
-      function User($id, $email){
+      var $mobile;
+      var $quikrid;
+      var $address;
+      var $photo_url;
+      function User($id, $name, $email,$mobile,$quikrid,$address,$photo_url){
          $this->id = $id;
+         $this->name = $name;
          $this->email = $email;
+         $this->mobile = $mobile;
+         $this->quikrid = $quikrid;
+         $this->address = $address;
+         $this->photo_url = $photo_url;
       }
    }
    class  Lawyer extends User{
       /* Member variables */    
-      var $mobile;  
-      var $quikrid;
-      var $address;
-      var $subcategory_id;
       var $specialization;
+      var $experience;
       var $council_id;
       var $verified;
       var $ratings;
-
+      var $city;
+      var $locality;
       //member functions
-      function Lawyer( $id, $email, $mobile , $quikrid, $address, $subcategory_id, $specialization, $council_id, $verified, $ratings){
-         User::User($id,$email);
-         $this->mobile = $mobile;
-         $this->quikrid = $quikrid;
-         $this->address = $address;
-         $this->subcategory_id = $subcategory_id;
+
+      function Lawyer( $id, $name, $email, $mobile , $quikrid, $address, 
+         $specialization, $experience, $council_id, $verified, $ratings , $photo_url, $city, $locality){
+         User::User($id,$name, $email,$mobile,$quikrid,$address,$photo_url);         
          $this->specialization = $specialization;
          $this->council_id = $council_id;
+         $this->experience = $experience;
          $this->verified = $verified;
          $this->ratings = $ratings;
+         $this->city = $city;
+         $this->locality = $locality;
       }
    }
 
    class Customer extends User{
-      var $mobile;
-      function Customer($id,$email,$mobile){
-         User::User($id,$email);
-         $this->mobile = $mobile;
+      function Customer($id, $name, $email,$mobile,$quikrid,$address,$photo_url){
+         User::User($id, $name, $email,$mobile,$quikrid,$address,$photo_url);         
       }
    }
 
@@ -60,21 +67,21 @@
       }
    }
 
-   class Case {
+   class LegalCase{
       var $id;
       var $title;
       var $description;
       var $subcategory_id;
-      var $closed;
+      var $status;
       var $date_of_posting;
 
-      function Case($id, $title, $description, $subcategory_id,$date_of_posting, $closed){
+      function LegalCase($id, $title, $description, $subcategory_id,$date_of_posting, $status){
          $this->id = $id;
          $this->title = $title;
          $this->description = $description;
          $this->subcategory_id = $subcategory_id;
          $this->date_of_posting = $date_of_posting;
-         $this->closed = $closed;
+         $this->status = $status;
       }
    }
 ?>
