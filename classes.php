@@ -70,18 +70,36 @@
    class LegalCase{
       var $id;
       var $title;
-      var $description;
       var $subcategory_id;
       var $status;
       var $date_of_posting;
+      var $customer_id;
+      var $lawyer_id;
 
-      function LegalCase($id, $title, $description, $subcategory_id,$date_of_posting, $status){
+      function LegalCase($id, $title, $subcategory_id, $date_of_posting, $status, $customer_id, $lawyer_id){
          $this->id = $id;
          $this->title = $title;
-         $this->description = $description;
          $this->subcategory_id = $subcategory_id;
          $this->date_of_posting = $date_of_posting;
          $this->status = $status;
+         $this->customer_id = $customer_id;
+         $this->lawyer_id = $lawyer_id;
+      }
+   }
+
+   class Message{
+      var $id;
+      var $case_id;
+      var $content;
+      var $sender_id;
+      var $timestamp;
+
+      function Message($id, $content, $sender_id, $timestamp){
+         $this->id = $id;
+         $this->case_id = $case_id;
+         $this->content = $content;
+         $this->sender_id = $sender_id;
+         $this->timestamp = $timestamp;
       }
    }
 ?>

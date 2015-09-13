@@ -12,7 +12,7 @@
 			    if($row = $result->fetch_assoc()) {
 			      $_SESSION["username"] = $row["email"];
 			      $_SESSION["id"] = $row["id"];
-			      header('Location:  index.php');
+			      header('Location:  search.php');
 			    }
 			} else {
 			    //echo "0 results";
@@ -34,7 +34,7 @@
 						$id = $row['id'];
 					}
 					echo $id ;
-					$specialization = "1,2";
+					//$specialization = "1,2";
 				  	$_SESSION["username"] = $email;
 			      	$_SESSION["id"] = $id;
 			      	if(strcmp($usertype,"Lawyer") == 0){
@@ -44,6 +44,7 @@
 						$price_range = $_REQUEST["price_range"];
 						$city = $_REQUEST["city"];
 						$locality = $_REQUEST["locality"];
+						$specialization = $_REQUEST["specialization"];
 						$sql = 'INSERT INTO lawyers(id, name, phone, specialization, council_id, experience, photo_url, price_range, city, locality) VALUES 
 								(' . $id . ',"' 
 									 . $name . '", '
@@ -57,7 +58,7 @@
 									 . $locality . '")';
 						echo $sql;
 						if ($conn->query($sql) === TRUE) {
-							header('Location:  index.php');
+							header('Location:  search.php');
 						}
 					} else {
 						$sql='INSERT INTO customers(id,name,phone) values (
@@ -65,7 +66,7 @@
 							')';
 						echo $sql;
 						if ($conn->query($sql) === TRUE) {
-							header('Location:  index.php');
+							header('Location:  search.php');
 						}
 					}			      	
 			      	//header('Location:  index.php');
@@ -137,6 +138,8 @@
 							<input type="text"  name="photo_url" class="form-control" placeholder="Photo Url" autofocus>
 							<label for="price_range" class="sr-only">Price Range :</label> 
 							<input type="number" min="1" max="5" name="price_range" class="form-control" placeholder="Price Range" autofocus>
+							<label for="specialization" class="sr-only">specialization :</label> 
+							<input type="text"  name="specialization" class="form-control" placeholder="Specialization" autofocus>
 							<label for="city" class="sr-only">City :</label> 
 							 <select class="form-control" name="city" id="city">
 							    <option>Mumbai</option>

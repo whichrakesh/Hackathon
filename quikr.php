@@ -90,7 +90,7 @@
     // $json = createAdRequestJson("Mumbai", "IIT Powai", "9345545434", "somethineflakdakgfsd galdkgjdfgldkga g", "des dafjdsjkfjkasfhkdfjkadkfjkajdsfsa co", "imagessss");
     // echo json_encode($json);
     // sendPostAdRequest($json);
-    $json = getLawyersQ("Divorce", "Mumbai", "Bandra West");
+    //$json = getLawyersQ("Divorce", "Mumbai", "Bandra West");
 
 
     // foreach ($jsonIterator as $key => $val) {
